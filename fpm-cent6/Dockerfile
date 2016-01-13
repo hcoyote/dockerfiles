@@ -15,9 +15,17 @@
 #         which is available outside your container to make it easier
 #         to transfer your built RPMs around.
 #
+MAINTAINER Travis Campbell <hcoyote+docker@ghostar.org>
 FROM centos:6
-RUN yum update -y
-RUN yum -y install rubygems ruby-devel ruby-json gcc gcc-c++ python-setuptools rpm-build openssh-clients
+RUN yum update -y && yum -y install gcc  \
+	gcc-c++  \
+	openssh-clients \
+	python-setuptools  \
+	rpm-build  \
+	ruby-devel  \
+	ruby-json  \
+	rubygems \
+     && yum clean all
 RUN gem install cabin -v 0.7.2 && gem install fpm
 RUN mkdir /tmp/fpmbuild
 VOLUME ["/tmp/fpmbuild"]
