@@ -25,7 +25,10 @@ RUN yum update -y && yum -y install gcc  \
 	ruby-devel  \
 	ruby-json  \
 	rubygems \
-     && yum clean all
+     && yum clean all \
+     && pip install pex
+# fpm fails because of an upstream change in cabin, so we meed to
+# pin it to the latest working release.
 RUN gem install cabin -v 0.7.2 && gem install fpm
 RUN mkdir /tmp/fpmbuild
 VOLUME ["/tmp/fpmbuild"]
