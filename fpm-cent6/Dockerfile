@@ -17,9 +17,12 @@
 #
 MAINTAINER Travis Campbell <hcoyote+docker@ghostar.org>
 FROM centos:6
-RUN yum update -y && yum -y install gcc  \
+RUN yum update -y \
+     && rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm \
+     && yum -y install gcc  \
 	gcc-c++  \
 	openssh-clients \
+	python-pip \
 	python-setuptools  \
 	rpm-build  \
 	ruby-devel  \
