@@ -15,8 +15,8 @@
 #         which is available outside your container to make it easier
 #         to transfer your built RPMs around.
 #
-MAINTAINER Travis Campbell <hcoyote+docker@ghostar.org>
 FROM centos:6
+MAINTAINER Travis Campbell <hcoyote+docker@ghostar.org>
 RUN yum update -y \
      && rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm \
      && yum -y install gcc  \
