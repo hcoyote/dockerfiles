@@ -1,0 +1,20 @@
+echo kerberos.ghostar.org > /proc/sys/kernel/hostname
+
+if [ ! -e /var/kerberos/krb5kdc/principal ]; then  
+	/usr/sbin/kdb5_util -r GHOSTAR.ORG create -s
+	kadmin.local -r GHOSTAR.ORG -q "addprinc admin/admin"
+	kadmin.local -r GHOSTAR.ORG -q "addprinc hcoyote"
+
+
+	echo test using: kinit hcoyote
+fi 
+/etc/init.d/krb5kdc start
+/etc/init.d/kadmin start
+
+if [ ! -e /etc/http.keytab ]; then  
+	#apache stuff.
+	# http://www.microhowto.info/howto/configure_apache_to_use_kerberos_authentication.html
+	kinit admin/admin
+	kadmin -p admin/admin -q "addprinc -randkey HTTP/kerberos.ghostar.org"
+	kadmin -p admin/admin -q "ktadd -k /etc/http.keytab HTTP/kerberos.ghostar.org"
+fi
