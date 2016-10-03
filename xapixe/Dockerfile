@@ -6,6 +6,11 @@
 # Pre-build: 
 #   Acquire the latest vesrion of the xapi-xe RPM off the XenServer iso and
 #   place it somewhere accessible to a remote rpm installation path.
+#
+#   Create $HOME/.xe outside of the container and place in it the following:
+#      server=<hostname>
+#      user=<apiuser name or root>
+#      password=<password>
 # 
 # To build:
 #  Using defaults:
